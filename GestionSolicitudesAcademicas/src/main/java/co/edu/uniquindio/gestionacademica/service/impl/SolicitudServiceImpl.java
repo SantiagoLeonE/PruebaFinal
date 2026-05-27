@@ -14,6 +14,7 @@ import co.edu.uniquindio.gestionacademica.repository.UsuarioRepository;
 import co.edu.uniquindio.gestionacademica.service.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +32,9 @@ public class SolicitudServiceImpl implements SolicitudService {
     private final UsuarioRepository usuarioRepository;
     private final SolicitudMapper solicitudMapper;
     private final HistorialSolicitudService historialSolicitudService;
-    private final IAService iaService;
+
+    @Autowired(required = false)
+    private IAService iaService;
 
     @Override
     @Transactional
@@ -169,8 +172,12 @@ public class SolicitudServiceImpl implements SolicitudService {
 
         //Solo genera sugerencia de IA para ADMINISTRATIVO
         if (usuarioActual.getRol() == Rol.ADMINISTRATIVO) {
-            IAClasificacionResponseDTO sugerencia =
-                    iaService.sugerirClasificacion(solicitud.getDescripcion());
+            IAClasificacionResponseDTO sugerencia = null;
+
+            if (iaService != null) {
+                iaService.sugerirClasificacion(solicitud.getDescripcion());
+            }
+
             response.setSugerenciaIA(sugerencia);
         }
 
