@@ -15,5 +15,10 @@ security:
     secret: ${JWT_SECRET}
     expiration: ${JWT_EXPIRATION:3600000}
 
+app:
+  ia:
+    habilitada: true
+
 server:
-  port: 8080
+  port: ${PORT:8080}
+

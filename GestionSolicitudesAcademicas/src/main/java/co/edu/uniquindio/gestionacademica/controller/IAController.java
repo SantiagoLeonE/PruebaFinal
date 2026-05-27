@@ -6,12 +6,14 @@ import co.edu.uniquindio.gestionacademica.dto.response.ResumenIAResponseDTO;
 import co.edu.uniquindio.gestionacademica.service.IAService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ia")
 @RequiredArgsConstructor
+@ConditionalOnProperty(name = "app.ia.habilitada", havingValue = "true")
 public class IAController {
 
     private final IAService iaService;
