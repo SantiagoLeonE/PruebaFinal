@@ -20,20 +20,29 @@ public class CorsConfig {
 
         CorsConfiguration config = new CorsConfiguration();
 
-        //Permitir peticiones desde el frontend Angular
-        config.setAllowedOrigins(List.of(allowedOrigins, "https://pruebafinal-1.onrender.com"));
+        //Frontend permitido
+        config.setAllowedOriginPatterns(List.of(
+                allowedOrigins,
+                "https://pruebafinal-1.onrender.com"
+        ));
 
         //Métodos HTTP permitidos
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
-        //Headers permitidos incluyendo Authorization para JWT
+        //Headers permitidos
         config.setAllowedHeaders(List.of("*"));
 
-        //Permitir enviar cookies y headers de autorización
+        //Headers expuestos al frontend
+        config.setExposedHeaders(List.of("Authorization"));
+
+        //Permitir credenciales
         config.setAllowCredentials(true);
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
+
         source.registerCorsConfiguration("/**", config);
+
         return source;
     }
 }
