@@ -21,7 +21,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         //Permitir peticiones desde el frontend Angular
-        config.setAllowedOrigins(List.of(allowedOrigins, "https://TU-FRONTEND.onrender.com"));
+        config.setAllowedOrigins(List.of(allowedOrigins, "https://pruebafinal-1.onrender.com"));
 
         //Métodos HTTP permitidos
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
